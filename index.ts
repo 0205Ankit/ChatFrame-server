@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config({
   path: "./.env",
@@ -12,9 +13,19 @@ const app = express();
 const server = createServer(app);
 const corsConfig = {
   origin: process.env.CORS_ORIGIN,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "X-HTTP-Method-Override",
+    "Access-Control-Allow-Origin",
+  ],
 };
 
 app.use(express.json());
+app.use(cors(corsConfig));
 
 const io = new Server(server, {
   pingTimeout: 60000, // what is a pong packet?
