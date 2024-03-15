@@ -12,15 +12,6 @@ const app = express();
 const server = createServer(app);
 const corsConfig = {
   origin: process.env.CORS_ORIGIN,
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "X-HTTP-Method-Override",
-    "Access-Control-Allow-Origin",
-  ],
 };
 
 app.use(express.json());
